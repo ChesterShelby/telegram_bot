@@ -1,0 +1,8 @@
+Методы этой группы — средства поиска и замены строк внутри других строк:
+
+count  -  считать
+startswith  starts - начинается, with - с
+endswith  ends - кончается, with - с
+find, rfind  находить, искать
+index, rindex
+strip, lstrip, rstrip  обрыва
