@@ -1,0 +1,5 @@
+a = (1, 2)
+a = list(a)
+a.append(3)
+a = tuple(a)
+print(a)
