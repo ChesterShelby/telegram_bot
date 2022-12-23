@@ -3,4 +3,4 @@ def draw_box(height, width):    # функция принимает два па�
         print('*' * width)
 
 
-draw_box(5, 7)
+draw_box(50, 70)
