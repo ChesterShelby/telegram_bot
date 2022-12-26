@@ -1,9 +1,18 @@
 x = 5
+#
+#
+# def func():
+#     x += 1
+#
+#
+# func()
+# print(x)
 
 
-def func():
-    x += 1
+def func2(y):
+    z = y
+    z += 5
+    return z
 
 
-func()
-print(x)
+print(func2(int(input())))

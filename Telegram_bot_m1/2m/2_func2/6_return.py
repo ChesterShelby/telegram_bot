@@ -6,4 +6,4 @@ def func():
 
 result = func()
 print(result)
-# print(func())
+print(func())

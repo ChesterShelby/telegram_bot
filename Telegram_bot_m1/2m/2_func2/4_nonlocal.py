@@ -4,7 +4,7 @@ def a():
     def b():
         nonlocal x
         x += 1
-        
+
     b()
     print(x)
 

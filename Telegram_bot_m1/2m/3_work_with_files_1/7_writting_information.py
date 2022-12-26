@@ -1,0 +1,6 @@
+file = open('example_2.txt', 'w')
+file.write('hello world')
+file.close()
+file = open('example_2.txt', 'r')
+print(file.read())
+file.close()
