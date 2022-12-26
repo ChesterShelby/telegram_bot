@@ -15,4 +15,4 @@ dest = новое имя файла
 """
 
 import os
-os.rename("Pyshkin.txt", "Pyshkin.txt")
+os.rename("Pyshkin.txt", "text.txt")
