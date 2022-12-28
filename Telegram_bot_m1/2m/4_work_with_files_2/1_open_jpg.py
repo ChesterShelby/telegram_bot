@@ -1,2 +1,2 @@
 import os
-os.system('1.jpg')
+os.system('')

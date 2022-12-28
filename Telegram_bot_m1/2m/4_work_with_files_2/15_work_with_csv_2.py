@@ -12,7 +12,7 @@ with open(filename, "w", encoding="utf-8", newline="") as file:
        writer.writerow(dict(name=name, weight=values[0], price=values[1]))
 
 # Чтение файла
-rows = []
+
 with open(filename, "r", encoding="utf-8") as file:
    reader = csv.DictReader(file)
    rows = list(reader)  # reader - итерируемый объект и может быть преобразован в список строк

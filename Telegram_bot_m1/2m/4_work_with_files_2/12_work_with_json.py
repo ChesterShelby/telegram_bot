@@ -19,7 +19,7 @@ with open(filename, "w", encoding="utf-8") as file:
     file.write(json.dumps(info, ensure_ascii=False, indent=4))
 
 # Чтение из файла JSON-формата
-info_2 = []
+# info_2 = []
 with open(filename, encoding="utf-8") as file:
     info_2 = json.loads(file.read())
 
