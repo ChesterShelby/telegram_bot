@@ -104,7 +104,7 @@ if __name__ == "__main__":
     print(p1 + p3)  # Точка 2D (5.0, 11.0)
 
     # Отображаем количество созданных точек через переменную класса
-    print(Point2D.instances_count)  # 4 (p1, p2, p3, p1 + p2)
+    print(Point2D.instances_count)  # 4 (p1, p2, p3, p1 + p3)
 
     # Сложение точек через статический метод
     p4 = Point2D.sum(p1, p2, p3, Point2D(0, -21))

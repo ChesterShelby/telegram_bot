@@ -4,7 +4,6 @@ class Person:
     def __say_hello():
         print('Привет')
 
-
 person1 = Person
 print(person1._age)
 # person1.__say_hello()
