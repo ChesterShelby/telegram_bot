@@ -5,7 +5,7 @@ for i in sys.path:
 
 print()
 
-sys.path.append('E:\Project on Python/telegram_bot')
+sys.path.append('E:\Project on Python/interface_maxima')
 
 for i in sys.path:
     print(i)
