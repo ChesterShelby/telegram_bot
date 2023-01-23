@@ -4,7 +4,7 @@ class Test(int):
         self.num = num
 
     def __add__(self, num2):
-        return self.num * num2
+        return f'{self.num * num2}'
 
 
 a = Test(5)

@@ -12,6 +12,7 @@ my_package/
        __init__.py
        text.py
        line.py
+       fill.py
    formats/
        __init__.py
        jpeg.py
