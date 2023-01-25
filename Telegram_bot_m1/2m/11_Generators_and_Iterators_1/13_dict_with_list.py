@@ -13,6 +13,6 @@ print(f'\n4. {dict4}')
 dict5 = {x: {y: x for y in 'XYZ'} for x in 'ABC'}
 print(f'\n5. {dict5}')
 
-dict6 = {x: {y: [z for z in range(z, z+ 2)] for y in 'XYZ'} for x, z in zip('ABC', range(3))}
+dict6 = {x: {y: [z for z in range(z, z + 2)] for y in 'XYZ'} for x, z in zip('ABC', range(3))}
 print(f'\n6. {dict6}')
 
