@@ -4,6 +4,7 @@ def func(num):
         num -= 1
 
 
+
 result = func(5)
 print(result)
 
