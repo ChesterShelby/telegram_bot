@@ -11,3 +11,5 @@ def func(n):
 
 for j in func(numbers):
     print(j, end=' ')
+
+
