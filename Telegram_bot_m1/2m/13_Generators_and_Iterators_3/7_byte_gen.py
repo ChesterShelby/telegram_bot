@@ -11,7 +11,7 @@ def func():
     linecount = 0
     while True:
         part = yield line
-        linecount += part.count(b'\n')
+        linecount += part.find_num(b'\n')
         data.extend(part)
         if linecount > 0:
             index = data.index(b'\n')

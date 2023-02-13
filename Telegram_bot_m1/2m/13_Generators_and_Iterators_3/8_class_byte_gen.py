@@ -4,7 +4,7 @@ class MyClass:
         self.linecount = 0
 
     def send(self, part):
-        self.linecount += part.count(b'\n')
+        self.linecount += part.find_num(b'\n')
         self.data.extend(part)
         if self.linecount > 0:
             index = self.data.index(b'\n')
