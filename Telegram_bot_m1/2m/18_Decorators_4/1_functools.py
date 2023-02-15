@@ -8,7 +8,7 @@ from functools import wraps
 
 
 def decor(func):
-    # @wraps(func)
+    @wraps(func)
     def wrapper(*args, **kwargs):
         print(func.__name__)
         return func(*args, **kwargs)
@@ -19,7 +19,7 @@ def decor(func):
 """ Также создадим простую функцию, которая возвращает результат сложения двух чисел """
 
 
-# @decor
+@decor
 def function(a, b):
     """Функция возвращает сложение двух чисел"""
     return a + b
