@@ -1,4 +1,4 @@
-class Human:
+class Person:
     def __init__(self, name, lname, age):
         self.name = name
         self.lname = lname
@@ -11,7 +11,7 @@ class Human:
         print(f'Мой возраст {self.age}')
 
 
-class Student(Human):
+class Student(Person):
     def __init__(self, name, lname, age, class_num):
         super().__init__(name, lname, age)
         self.class_num = class_num
@@ -22,4 +22,3 @@ class Student(Human):
 
 student1 = Student('Иван', 'Петров', 14, 9)
 student1.say_class_num()
-student1.say_name()
