@@ -10,6 +10,5 @@ sentence = 'Python. Я занимаюсь программированием н�
 result1 = re.split(r'Python', sentence)
 print(result1)
 print(sentence.split('Python'))
-
-# result2 = re.split(r'Python', sentence, maxsplit=1)
-# print(result2)
+result2 = re.split(r'Python', sentence, maxsplit=1)
+print(result2)
