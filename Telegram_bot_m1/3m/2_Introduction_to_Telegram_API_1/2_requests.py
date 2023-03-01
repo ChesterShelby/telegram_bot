@@ -19,7 +19,7 @@ get_updates()
 
 def get_updates():
     r = requests.get(f'{BASE_URL}{TOKEN}/getUpdates?offset=1&timeout=10')
-    print(r.json())
+    print(r.json()['result'][-1])
 
 
 get_updates()
