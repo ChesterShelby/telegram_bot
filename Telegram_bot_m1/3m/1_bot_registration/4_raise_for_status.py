@@ -13,8 +13,8 @@ print(r.raise_for_status())
 Мы будем использовать raise_for_status для проверки
 """
 
-# if not r.raise_for_status():
-#     print('Все хорошо')
+if not r.raise_for_status():
+    print('Все хорошо')
 
 """
 С помощью данной библиотеки, мы можем также например скачивать фото, аудио, либо же видео. Помимо метода get, 
