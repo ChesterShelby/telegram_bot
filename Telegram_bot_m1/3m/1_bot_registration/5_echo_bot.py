@@ -6,7 +6,6 @@
 по которому мы будем отправлять запросы, а также переменную с токеном бота
 """
 
-import asyncio
 import requests
 from ttoken import TOKEN
 

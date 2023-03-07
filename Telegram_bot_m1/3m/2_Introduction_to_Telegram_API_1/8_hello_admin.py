@@ -19,6 +19,7 @@ def pulling():
         if count_message != len(response['result']):
             count_message = len(response['result'])
             message = response['result'][-1]
+            print(message)
             user_id = message['message']['from']['id']
             user_name = message['message']['from']['username']
             text = message['message']['text']
