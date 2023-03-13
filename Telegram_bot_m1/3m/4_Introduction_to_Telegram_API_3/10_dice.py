@@ -17,10 +17,15 @@ Python является интерпретируемым языком с сил�
 from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
+from os import getenv
+from sys import exit
 
-from ttoken import TOKEN
 
-bot = Bot(token=TOKEN)
+bot_token = getenv("BOT_TOKEN")
+if not bot_token:
+    exit("Error: no token provided")
+
+bot = Bot(token=bot_token)
 dp = Dispatcher(bot)
 
 

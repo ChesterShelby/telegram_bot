@@ -25,7 +25,7 @@ def pulling():
         if count_message != len(response['result']):
             count_message = len(response['result'])
             message = response['result'][-1]
-            print(message)
+            # print(message)
             chat_id = message['message']['chat']['id']
             user_id = message['message']['from']['id']
             if user_id == kik_id:
