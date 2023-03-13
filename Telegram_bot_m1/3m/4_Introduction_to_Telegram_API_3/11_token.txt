@@ -1,0 +1,28 @@
+Всё хорошо, но если вдруг вы захотите поделиться с кем-то кодом, то придётся каждый раз помнить об удалении из исходников
+токена бота, иначе придётся его перевыпускать у @BotFather. Чтобы обезопасить себя,
+давайте перестанем указывать токен прямо в коде, а вынесем его как переменную окружения.
+Замените следующие строчки из начала файла:
+
+import logging
+from aiogram import Bot, Dispatcher, executor, types
+
+bot = Bot(token="Ваш токен"
+
+
+на эти:
+
+import logging
+from aiogram import Bot, Dispatcher, executor, types
+from os import getenv
+from sys import exit
+
+bot_token = getenv("BOT_TOKEN")
+if not bot_token:
+    exit("Error: no token provided")
+
+bot = Bot(token=bot_token)
+
+
+Но теперь ваш бот не запустится, т.к. будет сразу завершаться с ошибкой Error: no token provided.
+Чтобы передать переменную окружения в PyCharm,
+откройте сверху раздел Run -> Edit Configurations и добавьте в окне Environment Variables переменную с именем BOT_TOKEN и значением токена.
