@@ -1,0 +1,233 @@
+Для начала давайте немного реализуем еще одну версию пулинга.
+Создадим переменную offset для указания в дальнейшем сдвига по нашим сообщениям
+
+def main():
+    offset = 0
+
+Далее реализуем основной бесконечный цикл, в котором будем проверять нет ли ошибки при запросе к телеграм API.
+В случае ошибки используем continue
+
+def main():
+    offset = 0
+
+    while True:
+        dt = dict(offset=offset, timeout=timeout)
+        try:
+            req = requests.post(geturl, data=dt, timeout=None).json()
+        except ValueError:
+            continue
+
+В цикле также обязательно проверим есть ли в ответе, который пришел ключи ‘ok’ и ‘result’. В случае отсутствия ключей,
+точно также используем continue
+
+def main():
+    offset = 0
+
+    while True:
+        dt = dict(offset=offset, timeout=timeout)
+        try:
+            req = requests.post(geturl, data=dt, timeout=None).json()
+        except ValueError:
+            continue
+
+        if not req['ok'] or not req['result']:
+            continue
+
+Если все в порядке, то мы начинаем перебирать значения по ключу ‘result’ и получим значения ключей ‘message’ и id пользователя
+
+def main():
+    offset = 0
+
+    while True:
+        dt = dict(offset=offset, timeout=timeout)
+        try:
+            req = requests.post(geturl, data=dt, timeout=None).json()
+        except ValueError:
+            continue
+
+        if not req['ok'] or not req['result']:
+            continue
+
+        for r in req['result']:
+           message = r['message']
+           id = message['chat']['id']
+
+Теперь проверим если есть ‘text’ в ‘message’, то мы словарь с необходимыми данными и отправляем эти данные на сервер,
+предварительно преобразовав в json. Также изменим значение сдвига на 1 и отправим пользователю сообщение.
+
+def main():
+    offset = 0
+
+    while True:
+        dt = dict(offset=offset, timeout=timeout)
+        try:
+            req = requests.post(geturl, data=dt, timeout=None).json()
+        except ValueError:
+            continue
+
+        if not req['ok'] or not req['result']:
+            continue
+
+        for r in req['result']:
+           message = r['message']
+           id = message['chat']['id']
+
+        if 'text' in message:
+           dt = dict(chat_id=id, text='reply')
+           requests.post(sendurl, data=dt).json()
+        offset = r['update_id'] + 1
+
+Теперь пришло время передать в нашем запросе инлайн клавиатуру. Как мы помним клавиатура состоит из массива массивов
+инлайн кнопок. Очень важно помнить, что при создании инлайн кнопки, мы обязательно должны указать хотя бы одно
+необязательное поле. Для начала создадим клавиатуру и сохраним в нее нашу клавиатуру в виде json
+
+def main():
+    offset = 0
+
+    while True:
+        dt = dict(offset=offset, timeout=timeout)
+        try:
+            req = requests.post(geturl, data=dt, timeout=None).json()
+        except ValueError:
+            continue
+
+        if not req['ok'] or not req['result']:
+            continue
+
+        for r in req['result']:
+           message = r['message']
+           id = message['chat']['id']
+
+        if 'text' in message:
+
+            keyboard = json.dumps({'inline_keyboard': [
+                       [{'text': 'Да', 'callback_data': '1'}]]})
+
+           dt = dict(chat_id=id, text='reply')
+           requests.post(sendurl, data=dt).json()
+        offset = r['update_id'] + 1
+
+и передадим в запрос
+
+def main():
+    offset = 0
+
+    while True:
+        dt = dict(offset=offset, timeout=timeout)
+        try:
+            req = requests.post(geturl, data=dt, timeout=None).json()
+        except ValueError:
+            continue
+
+        if not req['ok'] or not req['result']:
+            continue
+
+        for r in req['result']:
+           message = r['message']
+           id = message['chat']['id']
+
+        if 'text' in message:
+
+            keyboard = json.dumps({'inline_keyboard': [
+                       [{'text': 'Да', 'callback_data': '1'}]]})
+
+            dt = dict(chat_id=id, text='reply', reply_markup=keyboard)
+            requests.post(sendurl, data=dt).json()
+
+        offset = r['update_id'] + 1
+
+
+При отправке какого то текста нашему боту, в ответ он отправляет нам текст и выводит кнопку.
+Давайте добавим еще одну кнопку рядом с созданной
+
+def main():
+    offset = 0
+
+    while True:
+        dt = dict(offset=offset, timeout=timeout)
+        try:
+            req = requests.post(geturl, data=dt, timeout=None).json()
+        except ValueError:
+            continue
+
+        if not req['ok'] or not req['result']:
+            continue
+
+        for r in req['result']:
+           message = r['message']
+           id = message['chat']['id']
+
+        if 'text' in message:
+
+            keyboard = json.dumps({'inline_keyboard': [
+                            [{'text': 'Да', 'callback_data': '1'},
+                            {'text': 'Нет', 'callback_data': '2'}]]})
+
+            dt = dict(chat_id=id, text='reply', reply_markup=keyboard)
+            requests.post(sendurl, data=dt).json()
+
+        offset = r['update_id'] + 1
+
+Готово. Давайте добавим еще одну кнопку на ряд ниже
+
+def main():
+    offset = 0
+
+    while True:
+        dt = dict(offset=offset, timeout=timeout)
+        try:
+            req = requests.post(geturl, data=dt, timeout=None).json()
+        except ValueError:
+            continue
+
+        if not req['ok'] or not req['result']:
+            continue
+
+        for r in req['result']:
+           message = r['message']
+           id = message['chat']['id']
+
+        if 'text' in message:
+
+            keyboard = json.dumps({'inline_keyboard': [
+                               [{'text': 'Да', 'callback_data': '1'},
+                               {'text': 'Нет', 'callback_data': '2'}],
+                               [{'text': 'Не знаю', 'callback_data': '0'}]]})
+
+            dt = dict(chat_id=id, text='reply', reply_markup=keyboard)
+            requests.post(sendurl, data=dt).json()
+
+        offset = r['update_id'] + 1
+
+
+Как мы видим добавлять инлайн клавиатуру не так сложно. А давайте изменим нижнюю кнопку так,
+чтобы она вела нас на какой то адрес в сети
+
+def main():
+    offset = 0
+
+    while True:
+        dt = dict(offset=offset, timeout=timeout)
+        try:
+            req = requests.post(geturl, data=dt, timeout=None).json()
+        except ValueError:
+            continue
+
+        if not req['ok'] or not req['result']:
+            continue
+
+        for r in req['result']:
+           message = r['message']
+           id = message['chat']['id']
+
+        if 'text' in message:
+
+            keyboard = json.dumps({'inline_keyboard': [
+                               [{'text': 'Да', 'callback_data': '1'},
+                               {'text': 'Нет', 'callback_data': '2'}],
+                               [{'text': 'Google', 'url': 'www.google.ru'}]]})
+
+            dt = dict(chat_id=id, text='reply', reply_markup=keyboard)
+            requests.post(sendurl, data=dt).json()
+
+        offset = r['update_id'] + 1
