@@ -72,10 +72,10 @@ def main():
            message = r['message']
            id = message['chat']['id']
 
-        if 'text' in message:
-           dt = dict(chat_id=id, text='reply')
-           requests.post(sendurl, data=dt).json()
-        offset = r['update_id'] + 1
+            if 'text' in message:
+               dt = dict(chat_id=id, text='reply')
+               requests.post(sendurl, data=dt).json()
+            offset = r['update_id'] + 1
 
 Теперь пришло время передать в нашем запросе инлайн клавиатуру. Как мы помним клавиатура состоит из массива массивов
 инлайн кнопок. Очень важно помнить, что при создании инлайн кнопки, мы обязательно должны указать хотя бы одно
@@ -98,14 +98,14 @@ def main():
            message = r['message']
            id = message['chat']['id']
 
-        if 'text' in message:
+            if 'text' in message:
 
-            keyboard = json.dumps({'inline_keyboard': [
-                       [{'text': 'Да', 'callback_data': '1'}]]})
+                keyboard = json.dumps({'inline_keyboard': [
+                           [{'text': 'Да', 'callback_data': '1'}]]})
 
-           dt = dict(chat_id=id, text='reply')
-           requests.post(sendurl, data=dt).json()
-        offset = r['update_id'] + 1
+               dt = dict(chat_id=id, text='reply')
+               requests.post(sendurl, data=dt).json()
+            offset = r['update_id'] + 1
 
 и передадим в запрос
 
@@ -126,15 +126,15 @@ def main():
            message = r['message']
            id = message['chat']['id']
 
-        if 'text' in message:
+            if 'text' in message:
 
-            keyboard = json.dumps({'inline_keyboard': [
-                       [{'text': 'Да', 'callback_data': '1'}]]})
+                keyboard = json.dumps({'inline_keyboard': [
+                           [{'text': 'Да', 'callback_data': '1'}]]})
 
-            dt = dict(chat_id=id, text='reply', reply_markup=keyboard)
-            requests.post(sendurl, data=dt).json()
+                dt = dict(chat_id=id, text='reply', reply_markup=keyboard)
+                requests.post(sendurl, data=dt).json()
 
-        offset = r['update_id'] + 1
+            offset = r['update_id'] + 1
 
 
 При отправке какого то текста нашему боту, в ответ он отправляет нам текст и выводит кнопку.
@@ -157,16 +157,16 @@ def main():
            message = r['message']
            id = message['chat']['id']
 
-        if 'text' in message:
+            if 'text' in message:
 
-            keyboard = json.dumps({'inline_keyboard': [
-                            [{'text': 'Да', 'callback_data': '1'},
-                            {'text': 'Нет', 'callback_data': '2'}]]})
+                keyboard = json.dumps({'inline_keyboard': [
+                                [{'text': 'Да', 'callback_data': '1'},
+                                {'text': 'Нет', 'callback_data': '2'}]]})
 
-            dt = dict(chat_id=id, text='reply', reply_markup=keyboard)
-            requests.post(sendurl, data=dt).json()
+                dt = dict(chat_id=id, text='reply', reply_markup=keyboard)
+                requests.post(sendurl, data=dt).json()
 
-        offset = r['update_id'] + 1
+            offset = r['update_id'] + 1
 
 Готово. Давайте добавим еще одну кнопку на ряд ниже
 
@@ -220,14 +220,14 @@ def main():
            message = r['message']
            id = message['chat']['id']
 
-        if 'text' in message:
+            if 'text' in message:
 
-            keyboard = json.dumps({'inline_keyboard': [
-                               [{'text': 'Да', 'callback_data': '1'},
-                               {'text': 'Нет', 'callback_data': '2'}],
-                               [{'text': 'Google', 'url': 'www.google.ru'}]]})
+                keyboard = json.dumps({'inline_keyboard': [
+                                   [{'text': 'Да', 'callback_data': '1'},
+                                   {'text': 'Нет', 'callback_data': '2'}],
+                                   [{'text': 'Google', 'url': 'www.google.ru'}]]})
 
-            dt = dict(chat_id=id, text='reply', reply_markup=keyboard)
-            requests.post(sendurl, data=dt).json()
+                dt = dict(chat_id=id, text='reply', reply_markup=keyboard)
+                requests.post(sendurl, data=dt).json()
 
-        offset = r['update_id'] + 1
+            offset = r['update_id'] + 1
