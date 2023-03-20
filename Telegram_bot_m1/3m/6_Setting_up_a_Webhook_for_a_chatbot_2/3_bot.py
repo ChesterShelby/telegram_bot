@@ -27,7 +27,7 @@ WEBAPP_HOST - хост нашего приложения, оставляем л�
 WEBAPP_PORT – порт, на котором работает наше приложение
 
 """  # настройки вебхуков
-WEBHOOK_HOST = 'https://e139-85-193-108-171.in.ngrok.io'
+WEBHOOK_HOST = 'https://8e6d-85-193-108-171.ap.ngrok.io'
 WEBHOOK_PATH = ''
 WEBHOOK_URL = f"{WEBHOOK_HOST}{WEBHOOK_PATH}"
 
