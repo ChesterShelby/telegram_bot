@@ -16,17 +16,17 @@ with sqlite3.connect(db_filename) as conn:
         print('Inserting initial data')
         conn.executescript("""
        insert into project (name, description, deadline)
-       values ('pymotw', ’Python Module of the Week’,
-       '2022-11-01’);
-       insert into task (details, status, deadline, project)
+       values ('pymotw', 'Python Module of the Week',
+       '2022-11-01');
+       insert into task (details, status, deadline, project, completed_on)
        values ('write about select', 'done', '2022-04-25',
-       'pymotw');
-       insert into task (details, status, deadline, project)
+       'pymotw', '2022-04-25');
+       insert into task (details, status, deadline, project, completed_on)
        values ('write about random', 'waiting', '2022—08—22',
-       'pymotw');
-       insert into task (details, status, deadline, project)
+       'pymotw', '2022—08—22');
+       insert into task (details, status, deadline, project, completed_on)
        values ('write about sqlite3', 'active', '2021—07—31',
-       'pymotw');
+       'pymotw', '2021—07—31');
        """)
     else:
         print('Database exists, assume schema does, too.')

@@ -37,8 +37,8 @@ async def echo(message: types.Message):
     cur = conn.cursor()
     user = cur.execute(f"""SELECT * FROM users WHERE userid = {message.chat.id}""").fetchone()
     if not user:
-        data = (message.chat.id, message.chat.username)
-        cur.execute("""INSERT INTO users(userid, username) VALUES (?,?)""", data)
+        data = (message.chat.id, message.chat.username, message.text)
+        cur.execute("""INSERT INTO users(userid, username, message) VALUES (?,?,?)""", data)
         conn.commit()
         conn.close()
         await message.answer('Вы добавлены в базу данных')
