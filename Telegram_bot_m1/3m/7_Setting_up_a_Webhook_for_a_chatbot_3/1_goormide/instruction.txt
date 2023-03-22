@@ -1,0 +1,164 @@
+На сегодняшнем занятии мы познакомимся еще с одним сервисом и поднимем на нем бота.
+А также немного познакомимся с работой с базой данных.
+Сервис не русскоязычный и даже не англоязычный, но используйте возможность перевода встроенную в браузере.
+
+Итак начнем с регистрации. Переходим по ссылке https://ide.goorm.io/
+Нажимаем на Start now
+(Картиночка 1)
+
+Проходим регистрацию через google аккаунт. Нас встречает интерфейс сервиса
+(Картиночка 2)
+
+Далее мы создадим новый контейнер
+(Картиночка 3)
+
+Заполняем имя и описание
+(Картиночка 4)
+
+Выбираем необходимый язык
+(Картиночка 5)
+
+Нажимаем на создание контейнера
+(Картиночка 6)
+
+Отлично.  После того как контейнер создастся, мы сможем начать писать код, прямо в нашем сервисе. Нажимаем запустить контейнер
+(Картиночка 7)
+
+Далее мы переходим в интерфейс ide
+(Картиночка 8)
+
+Изначально у нас уже есть файл index.py, в котором прописано hello world. Запускается файл по кнопке run.
+После любых изменений в файле. Необходимо сохранять изменения нажав на кнопку с дискеткой.
+
+Теперь определим переменные окружения. Возвращаемся на главную страницу, где создавали контейнер.
+Рядом с контейнером нажимаем на …
+(Картиночка 9)
+
+и выбираем Go to settings. Находим необходимый пункт и нажимаем Add
+(Картиночка 10)
+
+Вводим имя переменной и значение нашего токена
+(Картиночка 11)
+
+Готово. Вы также можете дополнительно определить любые переменные, значения которых, вы не хотите указывать в проекте напрямую.
+
+Теперь вернемся в редактор и изменим файл index.py указав там обычного эхо бота на пуллинге для проверки.
+Не забываем в консоли установить aiogram
+(Картиночка 12)
+
+
+После этого прописываем стандартный код
+
+import logging
+import os
+
+from aiogram import Bot, Dispatcher, executor, types
+
+TOKEN = os.environ.get('TOKEN')
+API_TOKEN = TOKEN
+
+logging.basicConfig(level=logging.INFO)
+
+bot = Bot(token=API_TOKEN)
+dp = Dispatcher(bot)
+
+
+@dp.message_handler(commands=['start', 'help'])
+async def send_welcome(message: types.Message):
+    await message.reply("Привет! Вы ввели одну из команд.")
+
+
+
+@dp.message_handler()
+async def echo(message: types.Message):
+    await message.answer(message.text)
+
+
+if __name__ == '__main__':
+    executor.start_polling(dp, skip_updates=True)
+
+
+
+Запускаем и проверяем. Пулинг работает отлично
+Теперь давайте переделаем все на вебхуки
+
+
+import logging
+import os
+
+from aiogram import Bot, types
+from aiogram.contrib.middlewares.logging import LoggingMiddleware
+from aiogram.dispatcher import Dispatcher
+from aiogram.dispatcher.webhook import SendMessage
+from aiogram.utils.executor import start_webhook
+
+
+API_TOKEN = os.environ.get('TOKEN')
+
+
+WEBHOOK_HOST = 'https://your.domain'
+WEBHOOK_PATH = '/path/to/api'
+WEBHOOK_URL = f"{WEBHOOK_HOST}{WEBHOOK_PATH}"
+
+
+WEBAPP_HOST = 'localhost'  # or ip
+WEBAPP_PORT = 3001
+
+logging.basicConfig(level=logging.INFO)
+
+bot = Bot(token=API_TOKEN)
+dp = Dispatcher(bot)
+dp.middleware.setup(LoggingMiddleware())
+
+
+@dp.message_handler()
+async def echo(message: types.Message):
+    return SendMessage(message.chat.id, message.text)
+
+
+async def on_startup(dp):
+    await bot.set_webhook(WEBHOOK_URL)
+
+
+async def on_shutdown(dp):
+    logging.warning('Shutting down..')
+    await bot.delete_webhook()
+    logging.warning('Bye!')
+
+
+if __name__ == '__main__':
+    start_webhook(
+        dispatcher=dp,
+        webhook_path=WEBHOOK_PATH,
+        on_startup=on_startup,
+        on_shutdown=on_shutdown,
+        skip_updates=True,
+        host=WEBAPP_HOST,
+        port=WEBAPP_PORT,
+    )
+
+
+Теперь прежде, чем изменить код шаблона, настроим кое что в сервисе. Идем опять на главную страницу. Находим URL/Port
+(Картиночка 13)
+
+Копируем url. (Если нет url и порта, то создаем)
+
+WEBHOOK_HOST = 'https://mybot-mulgn.run-eu-central1.goorm.site'
+WEBHOOK_PATH = ''
+WEBHOOK_URL = f"{WEBHOOK_HOST}{WEBHOOK_PATH}"
+
+Меняем строчки
+
+WEBAPP_HOST = '0.0.0.0'
+WEBAPP_PORT = 80
+
+Запускаем бота. Все работает! Отлично!
+
+
+WEBHOOK_HOST = 'https://mybot-oyvky.run-eu-central1.goorm.site'
+WEBHOOK_PATH = ''
+WEBHOOK_URL = f"{WEBHOOK_HOST}{WEBHOOK_PATH}"
+
+
+WEBAPP_HOST = '0.0.0.0'  # or ip
+WEBAPP_PORT = 80
